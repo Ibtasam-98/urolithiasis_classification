@@ -3,7 +3,6 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import os
-import time
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
@@ -156,24 +155,24 @@ class KidneyStoneModel:
     def load_and_preprocess_data(self, data_dir="dataset"):
         """Load and preprocess the kidney stone dataset"""
         try:
-            # Check if dataset exists
-            if not os.path.exists(data_dir):
-                st.error(f"Dataset directory '{data_dir}' not found!")
-                st.info("""
-                Please ensure your dataset is in the correct structure:
-                ```
-                dataset/
-                ├── Normal/
-                │   ├── image1.jpg
-                │   ├── image2.jpg
-                │   └── ...
-                └── Stone/
-                    ├── image1.jpg
-                    ├── image2.jpg
-                    └── ...
-                ```
-                """)
-                return None, None, None, None
+            # # Check if dataset exists
+            # if not os.path.exists(data_dir):
+            #     st.error(f"Dataset directory '{data_dir}' not found!")
+            #     st.info("""
+            #     Please ensure your dataset is in the correct structure:
+            #     ```
+            #     dataset/
+            #     ├── Normal/
+            #     │   ├── image1.jpg
+            #     │   ├── image2.jpg
+            #     │   └── ...
+            #     └── Stone/
+            #         ├── image1.jpg
+            #         ├── image2.jpg
+            #         └── ...
+            #     ```
+            #     """)
+            #     return None, None, None, None
 
             # Load datasets
             train_ds = tf.keras.utils.image_dataset_from_directory(
@@ -427,10 +426,7 @@ def show_home():
         2. **Predict**: Upload new images for classification
         3. **View Results**: Get instant classification with confidence scores
 
-    
-        - Supported formats: JPG, JPEG, PNG
-        - Recommended: 100+ images per class
-
+       
         ### Medical Application:
         - Assist radiologists in kidney stone detection
         - Quick preliminary screening
