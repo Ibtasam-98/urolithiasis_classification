@@ -3,6 +3,7 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import os
+import time
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
@@ -426,7 +427,22 @@ def show_home():
         2. **Predict**: Upload new images for classification
         3. **View Results**: Get instant classification with confidence scores
 
-       
+        ### Dataset Requirements:
+        Ensure your dataset is in the following structure:
+        ```
+        dataset/
+        ├── Normal/
+        │   ├── image1.jpg
+        │   ├── image2.jpg
+        │   └── ...
+        └── Stone/
+            ├── image1.jpg
+            ├── image2.jpg
+            └── ...
+        ```
+        - Supported formats: JPG, JPEG, PNG
+        - Recommended: 100+ images per class
+
         ### Medical Application:
         - Assist radiologists in kidney stone detection
         - Quick preliminary screening
