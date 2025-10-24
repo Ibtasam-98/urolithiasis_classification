@@ -156,24 +156,24 @@ class KidneyStoneModel:
     def load_and_preprocess_data(self, data_dir="dataset"):
         """Load and preprocess the kidney stone dataset"""
         try:
-            # Check if dataset exists
-            if not os.path.exists(data_dir):
-                st.error(f"Dataset directory '{data_dir}' not found!")
-                st.info("""
-                Please ensure your dataset is in the correct structure:
-                ```
-                dataset/
-                ├── Normal/
-                │   ├── image1.jpg
-                │   ├── image2.jpg
-                │   └── ...
-                └── Stone/
-                    ├── image1.jpg
-                    ├── image2.jpg
-                    └── ...
-                ```
-                """)
-                return None, None, None, None
+            # # Check if dataset exists
+            # if not os.path.exists(data_dir):
+            #     st.error(f"Dataset directory '{data_dir}' not found!")
+            #     st.info("""
+            #     Please ensure your dataset is in the correct structure:
+            #     ```
+            #     dataset/
+            #     ├── Normal/
+            #     │   ├── image1.jpg
+            #     │   ├── image2.jpg
+            #     │   └── ...
+            #     └── Stone/
+            #         ├── image1.jpg
+            #         ├── image2.jpg
+            #         └── ...
+            #     ```
+            #     """)
+            #     return None, None, None, None
 
             # Load datasets
             train_ds = tf.keras.utils.image_dataset_from_directory(
