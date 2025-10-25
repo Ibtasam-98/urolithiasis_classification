@@ -7,6 +7,7 @@ def load_datasets():
     # Load full dataset to get class names
     full_ds = tf.keras.utils.image_dataset_from_directory(
         config.DATA_DIR,
+
         seed=config.SEED,
         image_size=config.IMG_SIZE,
         batch_size=config.BATCH_SIZE

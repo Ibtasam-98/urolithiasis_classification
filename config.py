@@ -8,6 +8,7 @@ class Config:
     SAVE_FIGS_DIR = "figs"
     MODELS_DIR = "saved_models"
 
+
     def __init__(self):
         # Create directories
         os.makedirs(self.SAVE_FIGS_DIR, exist_ok=True)
