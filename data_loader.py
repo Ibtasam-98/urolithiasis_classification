@@ -3,8 +3,7 @@ from tensorflow.keras import layers
 from config import config
 
 def load_datasets():
-    """Load and split the dataset into train, validation, and test sets"""
-    # Load full dataset to get class names
+
     full_ds = tf.keras.utils.image_dataset_from_directory(
         config.DATA_DIR,
 
