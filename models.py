@@ -22,6 +22,7 @@ def create_dnn_model(input_dim):
         metrics=["accuracy"]
     )
 
+
     return model
 
 def create_mlp_model(input_dim):

@@ -28,6 +28,7 @@ def print_final_comparison(results_dict, model_names):
     comparison_metrics = ['accuracy', 'precision', 'recall', 'f1_score', 'specificity',
                           'npv', 'fnr', 'fpr', 'jaccard', 'kappa', 'fmi']
 
+
     print(f"{'Metric':<15}", end="")
     for model in model_names:
         print(f"{model:>12}", end="")
