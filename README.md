@@ -25,12 +25,12 @@ The study evaluates three neural network models — **Deep Neural Network (DNN)*
 - ReLU activation, Batch Normalization, and Dropout  
 - ~6.5 million parameters  
 
-### ⚙️ 2. Multi-Layer Perceptron (MLP)
+### 2. Multi-Layer Perceptron (MLP)
 - Compact and computationally efficient (128 → 64 neurons)  
 - Optimal balance between performance and speed  
 - ~1.6 million parameters  
 
-### 🔄 3. Autoencoder-based DNN (AE-DNN)
+### 3. Autoencoder-based DNN (AE-DNN)
 - Hybrid model combining **unsupervised feature learning** (autoencoder) and **supervised classification**  
 - Encoder-decoder for deep feature extraction  
 - ~7.2 million parameters  
