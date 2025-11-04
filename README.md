@@ -50,4 +50,26 @@ The study evaluates three neural network models — **Deep Neural Network (DNN)*
   - 20% Test  
 
 ---
+## Train Models
+ - Train DNN python main.py --model dnn --epochs 10 --batch_size 32
+ - Train MLP python main.py --model mlp --epochs 10 --batch_size 32
+ - Train AE-DNN python main.py --model ae_dnn --epochs 10 --batch_size 32
+
+---
+## Project Strcture
+
+urolithiasis_classification/
+├── dataset/                 # Kidney stone images
+├── saved_models/            # Trained model weights
+├── figs/                    # Results and visualizations
+├── main.py                  # Main training script
+├── models.py                # Model architectures
+├── data_loader.py           # Data preprocessing
+├── evaluation.py            # Performance metrics
+├── visualization.py         # Plotting functions
+├── app.py                   # Web interface
+├── config.py                # Configuration settings
+├── utils.py                 # Utility functions
+└── requirements.txt         # Dependencies
+
 
