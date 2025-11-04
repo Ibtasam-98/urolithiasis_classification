@@ -72,4 +72,15 @@ urolithiasis_classification/
 ├── utils.py                 # Utility functions
 └── requirements.txt         # Dependencies
 
+---
+
+## Performance Metrics
+
+| Model  | Accuracy | Sensitivity | Specificity | Precision | Training Time / Epoch |
+|:-------|:----------:|:-------------:|:-------------:|:------------:|:----------------:|
+| **AE-DNN** | 99.47% | 99.47% | 98.87% | 99.48% | 8.42s |
+| **MLP** | 99.67% | 99.67% | 99.44% | 99.67% | 0.58s |
+| **DNN** | 98.95% | 98.95% | 97.75% | 98.97% | 6.34s |
+
+
 
