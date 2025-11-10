@@ -1,0 +1,331 @@
+\documentclass[runningheads]{llncs}
+\usepackage{threeparttable}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+
+\begin{document}
+
+\title{Deep Learning Architectures for Urolithiasis Classification: A Comparative Analysis of DNN, MLP, and Autoencoder-based Models}
+\titlerunning{Urolithiasis Classification: DNN, MLP, and  Autoencoder-based Models}
+
+\author{Ibtasam Ur Rehman\inst{1}
+\and Abdulraqeb Alhammadi\inst{2}
+\and Jibran K. Yousafzai \inst{3}
+}
+
+\institute{\inst{1} Ho Chi Minh City University of Technology (HCMUT), Ho Chi Minh City, Vietnam\\
+\email{ribtrasam.sdh231@hcmut.edu.vn}
+\and
+\inst{2} Faculty of Artificial Intelligence, Universiti Teknologi Malaysia, Kuala Lumpur, Malaysia\\
+\email{abdulraqeb.alhammadi@utm.my}
+\and
+\inst{3} College of Engineering and Applied Sciences, American University of Kuwait, Kuwait\\
+\email{jyousafzai@auk.edu.kw}
+}
+
+\maketitle
+
+\begin{abstract}
+This paper presents contrastive analysis of deep learning for labeling kidney stones in medical images by utilizing and evaluating three neural network models Deep Neural Network (DNN), Multi-Layer Perceptron (MLP) and Autoencoder-based DNN (AE-DNN) on dataset of 9,416 kidney images from Kaggle \cite{kaggle2024kidney} as we assessed their performance using extensive clinical metrics. Practical results demonstrate that the MLP architecture achieved the highest accuracy of 99.67\% while AE-DNN showed competitive performance at 99.47\% accuracy. The study highlights contrastive analysis of ROC AUC (0.987 across all models) precision, recall characteristics and computational trade offs offering findings into architectural considerations for medical image classification and this research contributes to the understanding of deep learning applications in urological diagnostics while acknowledging their limitations including binary classification and the need for external validation.
+
+
+\keywords{Kidney Stone Classification \and Deep Learning \and Medical Imaging \and Neural Networks \and Computer-Aided Diagnosis}
+\end{abstract}
+
+
+
+% =============================================
+% INTRODUCTION SECTION
+% =============================================
+\section{Introduction}
+
+\subsection{Background and Motivation}
+Kidney stone disease represents vital global health burden with increasing incidence rates affecting approximately 10-15\% of population worldwide \cite{kittanamongkolchai2018changing,chewcharat2021trends}. Classical diagnostic methods including ultrasound, CT scans and standardized clinical biomarker analysis  require extensive manual interpretation by radiologists and clinicians which can be time consuming and subject to interobserver variability. The development of automated systems using deep learning presents opportunity to enhance the diagnostic accuracy, reduce interpretation time and improve healthcare accessibility. Recent studies in medical imaging and computational approaches has demonstrated significant potential for improving kidney stone detection along with classification offering the possibility of efficient and accurate diagnostic tools.
+
+\subsection{Challenges and Research Contribution}
+Traditional kidney stone diagnosis presents challenges including stone variability, limited access to imaging and subjective interpretation. While computational approaches have been explored, comprehensive comparisons of deep learning architectures for kidney stone classification remain limited. This research systematically evaluates three neural network architectures DNN, MLP and AE-DNN providing insights into their performance, efficiency and clinical applicability for kidney stone detection.
+
+\subsection{Related Work in Kidney Stone Classification}
+Recent research has demonstrated the effectiveness of machine learning and deep learning approaches for kidney stone classification across multiple data modalities and imaging techniques and several studies have focused on traditional machine learning approaches using custom features. Asaye et al \cite{asaye2025detection} utilizes machine learning approach to detect kidney stones from ultrasound images using 410 annotated samples employing Gabor filtering and threshold-based segmentation with GLCM texture features. Their approach obtained 98.4\% accuracy with the KNN algorithm demonstrating the potential of traditional feature based methods.  Complementing imaging approaches, research using clinical variables has also shown promise. Orlando Iparraguirre Villanueva et al \cite{iparraguirre2025data} evaluated multiple ML algorithms using non-imaging clinical parameters with Logistic Regression achieving 78\% accuracy. At the same time Panda et al \cite{10962624} reported 93\% accuracy using urine analysis data which included physical features such as pH and calcium concentration. In the domain of ultrasound image processing Khan et al \cite{khan2022detection} developed automated detection system employing median filtering for noise reduction and adaptive thresholding for segmentation, achieving 96.82\% accuracy and 92.16\% sensitivity. Their method demonstrated computational efficiency while overcoming challenges like speckle noise and low contrast in ultrasound images. Deep learning approaches have shown particular promise in kidney stone classification. Kumar et al \cite{kumar2024hybrid} proposed hybrid CNN-ResNet model that achieved 90.9\% accuracy by utilizing CNN feature extraction capabilities and ResNet deep learning advantages. Further advancing deep learning applications Yubao Liu et al \cite{liu2025integrated} developed the integrated radiomics and deep learning model for classifying kidney stone types on CT urography achieving exceptional performance withAUC of 0.95. Jacob et al \cite{jacob2025optimised} compared three deep learning models for kidney stone identification from CT scans finding that ResNet50 outperformed both VGG16 and standard CNN by 7.7\% and 4.5\% respectively. Despite these advancements there is a need that remains for comprehensive comparative studies of different neural network architectures specifically optimized for kidney stone classification using clinical biomarkers and imaging data. Our research addresses this gap by providing extensive evaluation of DNN, MLP and AE-DNN architectures on a substantial dataset of kidney images offering insights into their relative strengths, limitations and clinical applicability for kidney stone detection. This study builds upon existing work by systematically comparing architectural approaches and providing detailed performance metrics relevant to clinical deployment.
+
+
+
+
+
+% =============================================
+% METHODOLOGY SECTION
+% =============================================
+\section{Methodology}
+This study presents a comparative analysis of DL approaches for kidney stone classification using medical imaging data. The methodology comprises of data preprocessing, model development and evaluation. The research workflow is narrated in Methodological Framework for Kidney Stone Classification Figure \ref{fig:flow}. Three distinct neural network architectures were implemented and evaluated including Deep Neural Network, Multi-Layer Perceptron and Autoencoder-based DNN enabling robust performance comparison across different deep learning approaches.
+
+\begin{figure*}[h]
+\centering
+\includegraphics[width=1.0\textwidth, height=0.30\textheight]{flow.png}
+\centering
+\caption{Methodological Framework for Kidney Stone Classification using Deep Learning Approaches}
+\label{fig:flow}
+\end{figure*}
+
+
+\vspace{-0.9cm}
+\subsection{Dataset Description and Preprocessing}
+
+\subsubsection{Data Collection and Characteristics}
+The study utilized the publicly available Kidney Stone Classification and Object Detection dataset comprising 9,416 high-quality annotated images categorized into two distinct classes: \textbf{Normal} (4,708 images) and \textbf{Stone} (4,708 images). The perfect 50:50 class balance reflects intentional dataset construction methodology where equal numbers of confirmed normal and stone cases were systematically collected from multiple clinical sources to prevent class imbalance bias during model training and ensure robust performance evaluation. The dataset exhibits perfect class balance due to careful curation and data collection from multiple clinical sources, ensuring unbiased model training and evaluation. All images were standardized to $64 \times 64$ pixel resolution with RGB color channels, resulting in input dimension of $12,288$ features per sample $(64 \times 64 \times 3)$. The 64×64 resolution was chosen after preliminary analysis confirmed that key stone characteristics remained discernible at this resolution while ensuring computational efficiency for architectural comparisonn. The resolution reduction was incorporated to ensure computational efficiency while maintaining diagnostic relevance, as confirmed by preliminary analysis which showed that stone visibility was preserved at this resolution.
+\begin{table}[h]
+\centering
+\caption{Dataset Split}
+\begin{tabular}{l c c}
+\hline
+\textbf{Split} & \textbf{Images} & \textbf{Percentage} \\
+\hline
+Training Set & $6,026$ & $64\%$ \\
+Validation Set & $1,507$ & $16\%$ \\
+Test Set & $1,883$ & $20\%$ \\
+\hline
+\textbf{Total} & $\mathbf{9,416}$ & $\mathbf{100\%}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsubsection{Data Cleaning, Validation and Preprocessing}
+Comprehensive data validation confirmed the absence of missing values across all 9,416 records. Image preprocessing involved pixel normalization to scale intensity values to the range [0,1] using the transformation:
+\begin{equation}
+I_{\text{normalized}} = \frac{I_{\text{original}}}{255}
+\end{equation}
+where $I_{\text{original}}$ signifies original pixel intensity values. This normalization ensures stable gradient computation during neural network training and accelerated convergence.
+
+For model training, images were flattened into one-dimensional vectors to accommodate fully-connected neural network architectures:
+\begin{equation}
+X_{\text{flat}} = \text{flatten}(I_{\text{normalized}}) \in \mathbb{R}^{12288}
+\end{equation}
+
+The decision to flatten images rather than use convolutional architectures was motivated by research objective to compare fundamental neural network architectures and their intrinsic ability to learn discriminative patterns directly from raw pixel data and without the inductive biases inherent in convolutional approaches. This methodological choice provides baseline performance metrics for fully connected networks and establishes foundation for future comparative studies with convolutional architectures, while maintaining computational efficiency for the architectural comparison. Statistical validation included verification of clinical relevance through distribution analysis of image features. The preprocessing pipeline ensured data consistency while preserving diagnostically significant patterns essential for accurate kidney stone detection, with preliminary analysis confirming that key stone characteristics remained discernible at the 64×64 pixel resolution.
+
+\subsubsection{Data Augmentation and Training Strategy}
+Although the primary dataset did not utilize synthetic data augmentation due to its substantial size and balanced nature and the training strategy employed several techniques to enhance model robustness. The dataset was processed using TensorFlow's data pipeline with automatic caching and prefetching to optimize training efficiency:
+\begin{equation}
+\text{Throughput} = \frac{\text{Batch Size}}{\text{Processing Time}} \quad \text{with} \quad \text{Batch Size} = 32
+\end{equation}
+
+The training validation split maintained strict separation to prevent data leakage, with validation set serving as independent benchmark for model selection and hyperparameter tuning. Cross validation was implemented through use of separate validation and test sets providing robust performance estimation. The dataset inherent quality and comprehensive coverage of pathological variations reduced the necessity for extensive augmentation, allowing models to learn from authentic clinical representations. This approach preserved the real-world distribution characteristics crucial for clinical deployment reliability.
+
+% \subsubsection{Ethical Considerations}
+% This study utilized the publicly available Kidney Stone Classification and Object Detection dataset from Kaggle \cite{kaggle2024kidney}, which contains de-identified medical images with appropriate patient consent obtained during original data collection. The dataset is compliant with ethical standards for secondary research use of anonymized medical data. All experimental procedures were conducted in accordance with relevant guidelines and regulations for computational analysis of medical imaging data.
+
+\vspace{-0.2cm}
+\subsection{Deep Learning Architectures}
+
+\subsubsection{Deep Neural Network (DNN) Architecture}
+The DNN architecture employed high capacity design with two hidden layers (512-256 neurons) using ReLU activation, batch normalization and dropout regularization ($p=0.3$). The model featured L2 regularization ($\lambda=10^{-4}$) and was optimized with Adam ($\alpha=0.001$), containing approximately 6.5 million parameters for comprehensive feature learning from kidney images.
+
+\vspace{-0.1cm}
+\subsubsection{Multi-Layer Perceptron (MLP) Architecture}
+The MLP architecture prioritized computational efficiency with compact design of two hidden layers (128-64 neurons). It utilized ReLU activation, batch normalization and moderate dropout ($p=0.2$) with L2 regularization ($\lambda=10^{-4}$). With only 1.6 million parameters and it achieved an optimal balance between performance and efficiency using the Adam optimization algorithm.
+
+\vspace{-0.1cm}
+\subsubsection{Autoencoder-based DNN (AE-DNN) Architecture}
+The AE-DNN employed hybrid approach using encoder-decoder for unsupervised feature learning and classifier on latent representations and it was trained in two phases with separate reconstruction and classification (cross-entropy) losses. Architectural details and systematic comparison of parameters, training configurations and regularization for all three models are provided in Table~\ref{tab:model_specs_nested} illustrating the complexity progression from MLP (1.6M) to DNN (6.5M) and AE-DNN (7.2M) parameters under consistent optimization settings.
+
+
+
+\begin{table*}[h]
+\centering
+\caption{Comparative Model Specifications and Mathematical Formulations}
+\label{tab:model_specs_nested}
+\begin{tabular}{p{2.7cm}ccc}
+\toprule
+\textbf{Spec.} & \textbf{DNN} & \textbf{MLP} & \textbf{AE-DNN} \\
+\midrule
+
+\noalign{\vspace{1.5mm}}
+\multicolumn{4}{l}{\textbf{Architectural Specs.}} \\
+\cmidrule(lr){1-4}
+\noalign{\vspace{1.5mm}}
+
+Arch Type & HCS & ES & H-US \\
+HL & 2 & 2 & 3 (encoder) + 3 (decoder) \\
+L-Dim & [512, 256] & [128, 64] & [512, 256, 128] \\
+Lat Dim & - & - & 128 \\
+TP & 6.5M & 1.6M & 7.2M \\
+\hline
+
+\noalign{\vspace{1.5mm}}
+\multicolumn{4}{l}{\textbf{General Settings}} \\
+\cmidrule(lr){1-4}
+\noalign{\vspace{1.5mm}}
+
+Input Dim & \multicolumn{3}{c}{12288 ($64 \times 64 \times 3$)} \\
+Act. Fn & \multicolumn{3}{c}{ReLU (hidden), Softmax (output)} \\
+Opt. & \multicolumn{3}{c}{Adam ($\alpha=0.001$)} \\
+Epochs & \multicolumn{3}{c}{10} \\
+B. Size & \multicolumn{3}{c}{32} \\
+\hline
+
+\noalign{\vspace{1.5mm}}
+\multicolumn{4}{l}{\textbf{Mathematical Formulations}} \\
+\cmidrule(lr){1-4}
+\noalign{\vspace{1.5mm}}
+
+\textbf{Regularization} &
+$\begin{aligned}
+&\text{L2: }\lambda=10^{-4}\\
+&\text{Dropout: }p=0.3
+\end{aligned}$ &
+$\begin{aligned}
+&\text{L2: }\lambda=10^{-4}\\
+&\text{Dropout: }p=p=0.2
+\end{aligned}$ &
+$\begin{aligned}
+&\text{Reconstruction: }\\
+&\mathcal{L}_{\text{recon}} = \frac{1}{N}\sum \|\mathbf{x} - \hat{\mathbf{x}}\|^2_2
+\end{aligned}$ \\
+\cline{2-4}
+\textbf{Loss Function} &
+$\mathcal{L} = \mathcal{L}_{\text{CE}} + \lambda\|\mathbf{W}\|^2_2$ &
+$\mathcal{L} = \mathcal{L}_{\text{CE}} + \lambda\|\mathbf{W}\|^2_2$ &
+$\begin{aligned}
+&\mathcal{L}_{\text{recon}} = \text{MSE}\\
+&\mathcal{L}_{\text{class}} = \text{Cross-entropy}
+\end{aligned}$ \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.3cm}
+
+\footnotesize
+\raggedright \textbf{Abbreviations:}\\
+\textbf{Spec.}: Specification, \textbf{Arch Type}: Architecture Type, \textbf{HCS}: High-capacity supervised, \textbf{ES}: Efficient supervised, \textbf{H-US}: Hybrid unsupervised-supervised, \textbf{HL}: Hidden Layers, \textbf{L Dim}: Layer Dimensions, \textbf{Lat Dim}: Latent Dimension, \textbf{TP}: Total Parameters, \textbf{Input Dim}: Input Dimension, \textbf{Act. Fn}: Activation Function, \textbf{Opt.}: Optimizer, \textbf{Epochs}: Training Epochs, \textbf{B. Size}: Batch Size.
+\end{table*}
+
+
+
+\subsection{Experimental Setup}
+\subsubsection{Training Configuration and Hyperparameters}
+All models were trained using consistent framework with random seed initialization (seed = 42) for reproducibility. The Adam optimizer was employed with learning rate $\alpha = 0.001$ and default momentum parameters ($\beta_1 = 0.9$, $\beta_2 = 0.999$). Models were trained for 10 epochs with batch size 32, using categorical cross-entropy loss for classification:
+
+\begin{equation}
+\mathcal{L}_{\text{CE}} = -\frac{1}{N} \sum_{i=1}^{N} \sum_{c=1}^{2} y_{i,c} \log(\hat{y}_{i,c})
+\end{equation}
+
+For the AE-DNN autoencoder component, mean squared error loss was used during pre-training:
+
+\begin{equation}
+\mathcal{L}_{\text{MSE}} = \frac{1}{N} \sum_{i=1}^{N} \|\mathbf{x}_i - \hat{\mathbf{x}}_i\|^2_2
+\end{equation}
+
+Learning rate scheduling with reduction on plateau (factor = 0.5, patience = 5 epochs) was incorporated to optimize convergence.
+
+
+\subsubsection{Evaluation Metrics and Validation Strategy}
+A comprehensive set of evaluation metrics was utilized to assess model performance from multiple perspectives. The primary metrics included accuracy, precision, recall, and F1-score, calculated as follows:
+
+\begin{equation}
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}, \quad \text{Precision} = \frac{TP}{TP + FP}
+\end{equation}
+
+\begin{equation}
+\text{Recall} = \frac{TP}{TP + FN}, \quad \text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+\end{equation}
+
+Additional clinical metrics included specificity and negative predictive value (NPV):
+
+\begin{equation}
+\text{Specificity} = \frac{TN}{TN + FP}, \quad \text{NPV} = \frac{TN}{TN + FN}
+\end{equation}
+
+The area under the Receiver Operating Characteristic curve (ROC AUC) and Precision-Recall curve (PR AUC) provided comprehensive measures of classification performance across all threshold values. Statistical metrics such as Cohen's Kappa and Matthews Correlation Coefficient (MCC) were also computed:
+
+\begin{equation}
+\kappa = \frac{p_o - p_e}{1 - p_e}, \quad \text{MCC} = \frac{TP \times TN - FP \times FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}
+\end{equation}
+
+The validation strategy employed an 80-20 train-validation-test split with stratified sampling to maintain class distribution. Model selection was based on the performance of the validation set, with final evaluation conducted on the held-out test set.
+
+
+% =============================================
+% RESULTS AND ANALYSIS SECTION
+% =============================================
+\section{Results and Analysis}
+
+\subsection{Overall Performance Comparison}
+
+\subsubsection{Accuracy Analysis Across Models}
+The comprehensive evaluation of three deep learning architectures revealed superior performance in kidney stone classification with all models achieving remarkably high accuracy levels, as detailed in Table~\ref{tab:kidney_comprehensive_analysis}. The Multi-Layer Perceptron (MLP) emerged as the top performer with validation accuracy of 99.67\% closely followed by the Autoencoder-based DNN (AE-DNN) at 99.47\% accuracy. The Deep Neural Network demonstrated strong performance with 98.95\% accuracy establishing a high baseline for comparison. The performance hierarchy demonstrates that MLP consistently outperforms other architectures across multiple metrics, particularly excelling in accuracy (99.67\%), precision (99.67\%) and F1-score (99.67\%).
+
+
+\subsubsection{Computational Efficiency Analysis}
+Analysis of training efficiency stated that the significant variation in computational requirements across all used architectures and the MLP architecture demonstrated optimal balance between performance and efficiency achieving the fastest training time of 0.58 seconds per epoch while maintaining 99.67\% accuracyand  DNN required moderate computational resources (6.34 seconds per epoch). At the same time AE-DNN despite its superior accuracy requried highest computational cost (8.42 seconds per epoch) due to its two stage training process which involved autoencoder pretraining. This analysis reveals the important trade off between model complexity and computational efficiency that must be considered for clinical deployment.
+
+\subsection{Comprehensive Model Evaluation}
+\subsubsection{Clinical Performance and Diagnostic Accuracy Analysis}
+Clinical evaluation revealed outstanding performance across all models with MLP achieving highest sensitivity (99.67\%) and specificity (99.44\%) demonstrating superior diagnostic capability however AE-DNN showed competitive performance with 99.47\% sensitivity and 98.87\% specificity. Both models maintained low false negative rates (MLP: 0.33\%, AE-DNN: 0.53\%) ensuring reliable kidney stone detection. Confusion matrix analysis confirmed MLP optimal balance with minimal classification errors (6 false positives, 4 false negatives), making it most suitable for clinical applications. All models demonstrated strong discriminatory power with identical AUC values of 0.987. MLP maintained the highest precision (99.67\%) across all recall levels, validating deep learning's reliability for kidney stone classification. Model performance was evaluated on the validation set for model selection, with final confirmation on the independent test set ensuring rigorous evaluation standards.
+
+
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.78\textwidth]{bar_chart.png}
+\caption{Comprehensive Accuracy Analysis for All Models}
+\label{fig:confusion_matrices}
+\end{figure}
+
+\subsection{Statistical Significance, Limitations and Clinical Relevance}
+The performance across all models demonstrates strong suitability of deep learning for kidney stone classification though several important limitations warrant consideration. The AUC value of 0.987 across all models while demonstrating robust performance suggests potential ceiling effects in dataset that merit further investigation. Although rigorous train-validation-test splits were maintained throughout the study, the absence of confidence intervals limits the statistical interpretation of the results. The perfectly balanced 50:50 class distribution while ideal for model training and comparison does not reflect real world clinical prevalence rates and may artificially inflate performance metrics. Additionally, the reduction of image resolution to 64×64 pixels, though computationally efficient, may have removed subtle diagnostic features that could be clinically relevant in more challenging cases or for detecting smaller stones. Despite these limitations, the clinical relevance remains substantial. The near perfect sensitivity (99.47-99.67\%) is particularly valuable for minimizing missed diagnoses in clinical practice, while the high specificity (97.75-99.44\%) helps reduce unnecessary follow up procedures and patient anxiety. The computational efficiency of MLP (0.58 seconds per epoch) further enhances its potential for real-time clinical applications.
+
+
+\begin{table*}[t!]
+\centering
+\caption{Comprehensive Kidney Stone Classification Performance Analysis and Clinical Evaluation Metrics}
+\label{tab:kidney_comprehensive_analysis}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lccccccccccc}
+\toprule
+\textbf{Model} &
+\multicolumn{3}{c}{\textbf{Performance Metrics}} &
+\multicolumn{5}{c}{\textbf{Clinical Metrics}} &
+\multicolumn{3}{c}{\textbf{Error Analysis}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-9} \cmidrule(lr){10-12}
+& \textbf{Acc (\%)} & \textbf{AUC} & \textbf{Time (s)} & \textbf{Sen (\%)} & \textbf{Spe (\%)} & \textbf{Pre (\%)} & \textbf{F1 (\%)} & \textbf{Err (\%)} & \textbf{FN (\%)} & \textbf{FP (\%)} \\
+\midrule
+AE-DNN & 99.47 & 0.987 & 8.42 & 99.47 & 98.87 & 99.48 & 99.47 & 0.53 & 0.53 & 1.13 \\
+MLP & 99.67 & 0.987 & 0.58 & 99.67 & 99.44 & 99.67 & 99.67 & 0.33 & 0.33 & 0.56 \\
+DNN & 98.95 & 0.987 & 6.34 & 98.95 & 97.75 & 98.97 & 98.94 & 1.05 & 1.05 & 2.25 \\
+\bottomrule
+\end{tabular}}
+
+\vspace{0.3cm}
+\footnotesize
+\raggedright \textbf{Abbreviations:} Acc: Accuracy, AUC: Area Under ROC Curve, Sen: Sensitivity, Spe: Specificity, Pre: Precision, Err: Error Rate, FN: False Negative Rate, FP: False Positive Rate. \textbf{Models:} AE-DNN: Autoencoder-based DNN, MLP: Multi-Layer Perceptron, DNN: Deep Neural Network. \textbf{Notes:} Training time measured in seconds per epoch. Results based on validation set performance.
+\end{table*}
+
+
+
+% =============================================
+% CONCLUSION AND FUTURE WORK SECTION
+% =============================================
+
+\subsection{Limitations and Statistical Considerations}
+While results demonstrate exceptional performance but several limitations warrant consideration as the consistent AUC value of 0.987 across all models while impressive, suggests potential ceiling effects in dataset. The 50:50 class distribution while ideal for model development, may not reflect real-world prevalence rates. Additionally, the image resolution reduction to 64×64 pixels, though computationally efficient, may have removed subtle diagnostic features that could be relevant in more challenging cases.
+
+The absence of confidence intervals and external validation represents a limitation in establishing generalizability. Future work should incorporate bootstrap confidence intervals and multi-center validation to strengthen the statistical robustness of these findings. Furthermore, the binary classification framework limits clinical applicability, as real-world diagnostic scenarios often require differentiation between multiple stone types and normal anatomical variations.
+
+
+
+
+\section{Conclusion and Future Work}
+This study demonstrates the effectiveness of deep learning models for kidney stone classification, with MLP achieving the highest accuracy of 99.67\% while providing optimal computational efficiency. All models achieved accuracy over 98.95\%, highlighting their potential for clinical deployment. The contrastive evaluation provides valuable insights into performance complexity trade offs for medical imaging applications. Future work will integrate Explainable AI \textbf{SHAP, LIME} for model interpretability and develop diagnostic tools for practical implementation and Multi-center validation and stone type classification will further enhance clinical applicability.
+
+\bibliographystyle{IEEEtran}
+\bibliography{ref}
+
+\end{document}

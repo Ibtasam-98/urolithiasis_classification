@@ -4,8 +4,9 @@ from utils import set_seeds, save_models, print_final_comparison
 from data_loader import load_datasets, preprocess_datasets
 from models import create_dnn_model, create_mlp_model, create_autoencoder_dnn_model
 from evaluation import evaluate_model
-from visualization import (plot_unified_training_history, create_comparison_visualizations,
-                       plot_epoch_comparison, create_model_architecture_diagrams)
+from visualization import (create_comparison_visualizations,
+                           print_results_summary)
+
 
 def main():
     # Set seeds for reproducibility
@@ -59,12 +60,14 @@ def main():
     histories.append(hist_cls.history)
     results_dict["AE-DNN"] = res_ae
 
-    # Generate visualizations
-    print("\nGenerating visualizations...")
-    plot_unified_training_history(histories, model_names, config.SAVE_FIGS_DIR)
-    create_comparison_visualizations(results_dict, config.SAVE_FIGS_DIR)
-    plot_epoch_comparison(histories, model_names, config.SAVE_FIGS_DIR)
-    create_model_architecture_diagrams(models_dict, config.SAVE_FIGS_DIR)
+    # Generate simplified visualizations (only accuracy comparison and confusion matrix)
+    print("\n" + "=" * 60)
+    print("GENERATING SIMPLIFIED VISUALIZATIONS")
+    print("=" * 60)
+    create_comparison_visualizations(results_dict, class_names, config.SAVE_FIGS_DIR)
+
+    # Print results summary
+    print_results_summary(results_dict)
 
     # Save models
     print("\nSaving models...")
@@ -73,6 +76,8 @@ def main():
     # Print final comparison
     print_final_comparison(results_dict, model_names)
 
+
 if __name__ == "__main__":
     mp.set_start_method("spawn", force=True)
     main()
+

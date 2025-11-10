@@ -131,5 +131,6 @@ def evaluate_model(model, train_ds, val_ds, test_ds, model_name, class_names, hi
         "metrics": metrics,
         "history": history.history if history else None,
         "y_true": y_true,
+        "y_pred": y_pred,  # Added this line
         "y_probs": y_probs
     }

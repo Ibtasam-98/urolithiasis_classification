@@ -60,3 +60,4 @@ def preprocess_datasets(train_ds, val_ds, test_ds):
     INPUT_DIM = config.IMG_SIZE[0] * config.IMG_SIZE[1] * 3
 
     return train_ds_flat, val_ds_flat, test_ds_flat, INPUT_DIM
+
