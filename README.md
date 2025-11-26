@@ -80,7 +80,7 @@ python main.py --model mlp --epochs 10 --batch_size 32
 # Train AE-DNN
 python main.py --model ae_dnn --epochs 10 --batch_size 32
 
-# 🤖 Model Architectures Overview
+# Model Architectures Overview
 
 This document outlines the design and key specifications for the various deep learning models used in this project.
 
