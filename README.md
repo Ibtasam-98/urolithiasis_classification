@@ -10,7 +10,7 @@
 ## Official Repository
 This is the official repository for the research paper:
 
-**"Deep Learning Architectures for Urolithiasis Classification: A Comparative Analysis of DNN, MLP, and Autoencoder-based Models"**
+**Deep Learning Architectures for Urolithiasis Classification: A Comparative Analysis of DNN, MLP, and Autoencoder-based Models**
 
 ---
 
