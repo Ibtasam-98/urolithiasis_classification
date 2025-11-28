@@ -6,7 +6,6 @@ import pandas as pd
 from config import config
 
 def set_seeds():
-    """Set all random seeds for reproducibility"""
     np.random.seed(config.SEED)
     random.seed(config.SEED)
     tf.random.set_seed(config.SEED)
