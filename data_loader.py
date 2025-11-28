@@ -33,7 +33,7 @@ def load_datasets():
         batch_size=config.BATCH_SIZE
     )
 
-    # Split train_val into train (80%) and val (20%)
+
     train_size = int(0.8 * len(list(train_val_ds)))
     train_ds = train_val_ds.take(train_size)
     val_ds = train_val_ds.skip(train_size)

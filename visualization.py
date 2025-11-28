@@ -32,7 +32,9 @@ setup_matplotlib()
 
 
 def plot_single_combined_confusion_matrix(results_dict, class_names, save_dir):
-    """Plot a single confusion matrix containing all models in one graph with HD quality"""
+    """Plot a single confusion matrix containing all models in one graph with HD quality
+       and print confusion matrices in terminal
+    """
     model_names = list(results_dict.keys())
     n_models = len(model_names)
 
@@ -53,11 +55,21 @@ def plot_single_combined_confusion_matrix(results_dict, class_names, save_dir):
 
         # Compute confusion matrix for current model
         cm = confusion_matrix(y_true, y_pred)
-
-        # Normalize confusion matrix
         cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 
-        # Initialize or add to combined matrices
+        # ✅ Print confusion matrix for each model in terminal
+        print(f"\n{'=' * 70}")
+        print(f"CONFUSION MATRIX for MODEL: {model_name}")
+        print(f"{'=' * 70}")
+        df_cm = pd.DataFrame(cm, index=class_names, columns=class_names)
+        print(df_cm.to_string())
+        print("\nNormalized Confusion Matrix:")
+        df_cm_norm = pd.DataFrame(np.round(cm_normalized, 3),
+                                  index=class_names, columns=class_names)
+        print(df_cm_norm.to_string())
+        print(f"{'=' * 70}\n")
+
+        # Combine for the averaged heatmap
         if combined_cm is None:
             combined_cm = cm
             combined_cm_normalized = cm_normalized
@@ -68,10 +80,8 @@ def plot_single_combined_confusion_matrix(results_dict, class_names, save_dir):
     # Average the normalized matrices
     combined_cm_normalized = combined_cm_normalized / n_models
 
-    # Create heatmap
+    # ---- (rest of your plotting code stays the same) ----
     im = ax.imshow(combined_cm_normalized, interpolation='nearest', cmap=cmap, vmin=0, vmax=1)
-
-    # Add text annotations
     thresh = combined_cm_normalized.max() / 2.
     for i in range(combined_cm_normalized.shape[0]):
         for j in range(combined_cm_normalized.shape[1]):
@@ -81,35 +91,21 @@ def plot_single_combined_confusion_matrix(results_dict, class_names, save_dir):
                     color="white" if combined_cm_normalized[i, j] > thresh else "black",
                     fontsize=18, fontweight='bold')
 
-    # Customize plot
-    model_list = ", ".join(model_names)
-    # ax.set_title(f'COMBINED CONFUSION MATRIX\nModels: {model_list}',
-    #              fontsize=18, fontweight='bold', pad=20)
     ax.set_xlabel('Predicted Label', fontsize=18, fontweight='bold')
     ax.set_ylabel('True Label', fontsize=18, fontweight='bold')
-
-    # Set tick labels
     tick_marks = np.arange(len(class_names))
     ax.set_xticks(tick_marks)
     ax.set_yticks(tick_marks)
     ax.set_xticklabels(class_names, rotation=45, ha='right', fontsize=12)
     ax.set_yticklabels(class_names, fontsize=18)
-
-    # Add grid
     ax.grid(False)
 
-    # Add colorbar
-    cbar = plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
-    # cbar.set_label('Normalized Value (Average across models)', fontsize=12, fontweight='bold')
-
-    # Add model information as text
-    model_info = f"Models included ({n_models}): {model_list}"
-    fig.text(0.5, 0.01, model_info, ha='center', fontsize=18, style='italic')
+    plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+    fig.text(0.5, 0.01, f"Models included ({n_models}): {', '.join(model_names)}",
+             ha='center', fontsize=18, style='italic')
 
     plt.tight_layout()
-    plt.subplots_adjust(bottom=0.1)  # Make space for the model info text
-
-    # Save the figure
+    plt.subplots_adjust(bottom=0.1)
     plt.savefig(os.path.join(save_dir, "combined_confusion_matrix.png"), dpi=400, bbox_inches='tight')
     plt.savefig(os.path.join(save_dir, "combined_confusion_matrix.pdf"), bbox_inches='tight')
     plt.close()
