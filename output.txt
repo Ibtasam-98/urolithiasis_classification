@@ -1,0 +1,279 @@
+/Users/dribtasam/PycharmProjects/urolithiasis_classification/.venv/bin/python /Users/dribtasam/PycharmProjects/urolithiasis_classification/main.py
+Simplified HD Visualization module loaded successfully!
+Available visualizations: Single Combined Confusion Matrix & Accuracy Comparison
+Loading and preprocessing data...
+Found 9416 files belonging to 2 classes.
+
+Classes found: ['Normal', 'stone']
+Found 9416 files belonging to 2 classes.
+Using 7533 files for training.
+Found 9416 files belonging to 2 classes.
+Using 1883 files for validation.
+2025-11-10 15:03:10.092236: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+
+============================================================
+TRAINING DEEP NEURAL NETWORK (DNN)
+============================================================
+Epoch 1/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 9s 44ms/step - accuracy: 0.9500 - loss: 0.2806 - val_accuracy: 0.9539 - val_loss: 0.2742
+Epoch 2/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 5s 28ms/step - accuracy: 0.9779 - loss: 0.1940 - val_accuracy: 0.9862 - val_loss: 0.1661
+Epoch 3/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 5s 28ms/step - accuracy: 0.9905 - loss: 0.1506 - val_accuracy: 0.9855 - val_loss: 0.1474
+Epoch 4/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 5s 28ms/step - accuracy: 0.9874 - loss: 0.1465 - val_accuracy: 0.9809 - val_loss: 0.1601
+Epoch 5/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 5s 29ms/step - accuracy: 0.9867 - loss: 0.1435 - val_accuracy: 0.9842 - val_loss: 0.1489
+Epoch 6/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 5s 28ms/step - accuracy: 0.9920 - loss: 0.1259 - val_accuracy: 0.9664 - val_loss: 0.1943
+Epoch 7/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 5s 29ms/step - accuracy: 0.9857 - loss: 0.1400 - val_accuracy: 0.9934 - val_loss: 0.1211
+Epoch 8/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 5s 29ms/step - accuracy: 0.9897 - loss: 0.1322 - val_accuracy: 0.9763 - val_loss: 0.1659
+Epoch 9/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 5s 28ms/step - accuracy: 0.9912 - loss: 0.1212 - val_accuracy: 0.9921 - val_loss: 0.1179
+Epoch 10/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 5s 29ms/step - accuracy: 0.9892 - loss: 0.1221 - val_accuracy: 0.9895 - val_loss: 0.1283
+2025-11-10 15:04:09.701657: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+
+============================================================
+MODEL EVALUATION: KIDNEY_STONE_DNN
+============================================================
+
+Train Accuracy:    99.17%
+Validation Accuracy: 98.95%
+Test Accuracy:     98.94%
+
+Key Metrics:
+accuracy       : 0.9895
+precision      : 0.9897
+recall         : 0.9895
+f1_score       : 0.9894
+specificity    : 0.9775
+npv            : 1.0000
+fnr            : 0.0000
+fpr            : 0.0225
+jaccard        : 0.9791
+kappa          : 0.9788
+fmi            : 0.9792
+
+============================================================
+TRAINING SMALLER MLP
+============================================================
+Epoch 1/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 2s 7ms/step - accuracy: 0.9466 - loss: 0.1865 - val_accuracy: 0.9888 - val_loss: 0.0882
+Epoch 2/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 1s 6ms/step - accuracy: 0.9852 - loss: 0.0858 - val_accuracy: 0.9974 - val_loss: 0.0572
+Epoch 3/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 1s 6ms/step - accuracy: 0.9912 - loss: 0.0722 - val_accuracy: 0.9947 - val_loss: 0.0625
+Epoch 4/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 1s 6ms/step - accuracy: 0.9934 - loss: 0.0626 - val_accuracy: 0.9888 - val_loss: 0.0710
+Epoch 5/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 1s 7ms/step - accuracy: 0.9887 - loss: 0.0737 - val_accuracy: 0.9848 - val_loss: 0.0900
+Epoch 6/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 1s 6ms/step - accuracy: 0.9909 - loss: 0.0686 - val_accuracy: 0.9954 - val_loss: 0.0604
+Epoch 7/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 1s 6ms/step - accuracy: 0.9958 - loss: 0.0556 - val_accuracy: 0.9881 - val_loss: 0.0725
+Epoch 8/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 1s 6ms/step - accuracy: 0.9937 - loss: 0.0613 - val_accuracy: 0.9848 - val_loss: 0.0885
+Epoch 9/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 1s 6ms/step - accuracy: 0.9948 - loss: 0.0614 - val_accuracy: 0.9341 - val_loss: 0.3114
+Epoch 10/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 1s 6ms/step - accuracy: 0.9917 - loss: 0.0696 - val_accuracy: 0.9967 - val_loss: 0.0604
+
+============================================================
+MODEL EVALUATION: KIDNEY_STONE_MLP
+============================================================
+
+Train Accuracy:    99.73%
+Validation Accuracy: 99.67%
+Test Accuracy:     99.31%
+
+Key Metrics:
+accuracy       : 0.9967
+precision      : 0.9967
+recall         : 0.9967
+f1_score       : 0.9967
+specificity    : 0.9944
+npv            : 0.9986
+fnr            : 0.0012
+fpr            : 0.0056
+jaccard        : 0.9934
+kappa          : 0.9934
+fmi            : 0.9934
+
+============================================================
+TRAINING AUTOENCODER-BASED DNN CLASSIFIER
+============================================================
+Epoch 1/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 9s 44ms/step - loss: 0.0319 - val_loss: 0.0212
+Epoch 2/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 8s 43ms/step - loss: 0.0174 - val_loss: 0.0137
+Epoch 3/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 8s 43ms/step - loss: 0.0120 - val_loss: 0.0110
+Epoch 4/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 8s 43ms/step - loss: 0.0103 - val_loss: 0.0101
+Epoch 5/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 9s 46ms/step - loss: 0.0095 - val_loss: 0.0096
+Epoch 6/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 9s 48ms/step - loss: 0.0090 - val_loss: 0.0090
+Epoch 7/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 9s 47ms/step - loss: 0.0086 - val_loss: 0.0091
+Epoch 8/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 10s 56ms/step - loss: 0.0084 - val_loss: 0.0084
+Epoch 9/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 8s 45ms/step - loss: 0.0078 - val_loss: 0.0082
+Epoch 10/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 9s 45ms/step - loss: 0.0076 - val_loss: 0.0080
+Epoch 1/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 5s 22ms/step - accuracy: 0.9608 - loss: 0.1054 - val_accuracy: 0.9776 - val_loss: 0.0457
+Epoch 2/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 4s 22ms/step - accuracy: 0.9880 - loss: 0.0375 - val_accuracy: 0.9980 - val_loss: 0.0089
+Epoch 3/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 4s 22ms/step - accuracy: 0.9900 - loss: 0.0347 - val_accuracy: 0.9947 - val_loss: 0.0179
+Epoch 4/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 4s 22ms/step - accuracy: 0.9985 - loss: 0.0073 - val_accuracy: 0.9954 - val_loss: 0.0196
+Epoch 5/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 4s 22ms/step - accuracy: 0.9985 - loss: 0.0046 - val_accuracy: 0.9974 - val_loss: 0.0121
+Epoch 6/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 4s 22ms/step - accuracy: 0.9937 - loss: 0.0196 - val_accuracy: 0.9974 - val_loss: 0.0074
+Epoch 7/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 4s 22ms/step - accuracy: 0.9977 - loss: 0.0053 - val_accuracy: 0.9960 - val_loss: 0.0295
+Epoch 8/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 4s 22ms/step - accuracy: 0.9988 - loss: 0.0052 - val_accuracy: 0.9987 - val_loss: 0.0072
+Epoch 9/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 4s 22ms/step - accuracy: 0.9934 - loss: 0.0238 - val_accuracy: 0.9974 - val_loss: 0.0089
+Epoch 10/10
+188/188 ━━━━━━━━━━━━━━━━━━━━ 4s 22ms/step - accuracy: 0.9992 - loss: 0.0016 - val_accuracy: 0.9947 - val_loss: 0.0248
+2025-11-10 15:06:35.082710: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+
+============================================================
+MODEL EVALUATION: KIDNEY_STONE_AUTOENCODER_DNN
+============================================================
+
+Train Accuracy:    99.55%
+Validation Accuracy: 99.47%
+Test Accuracy:     99.20%
+
+Key Metrics:
+accuracy       : 0.9947
+precision      : 0.9948
+recall         : 0.9947
+f1_score       : 0.9947
+specificity    : 0.9887
+npv            : 1.0000
+fnr            : 0.0000
+fpr            : 0.0113
+jaccard        : 0.9895
+kappa          : 0.9894
+fmi            : 0.9895
+
+============================================================
+GENERATING SIMPLIFIED VISUALIZATIONS
+============================================================
+
+======================================================================
+CONFUSION MATRIX for MODEL: DNN
+======================================================================
+        Normal  stone
+Normal     695     16
+stone        0    806
+
+Normalized Confusion Matrix:
+        Normal  stone
+Normal   0.977  0.023
+stone    0.000  1.000
+======================================================================
+
+
+======================================================================
+CONFUSION MATRIX for MODEL: MLP
+======================================================================
+        Normal  stone
+Normal     707      4
+stone        1    805
+
+Normalized Confusion Matrix:
+        Normal  stone
+Normal   0.994  0.006
+stone    0.001  0.999
+======================================================================
+
+
+======================================================================
+CONFUSION MATRIX for MODEL: AE-DNN
+======================================================================
+        Normal  stone
+Normal     703      8
+stone        0    806
+
+Normalized Confusion Matrix:
+        Normal  stone
+Normal   0.989  0.011
+stone    0.000  1.000
+======================================================================
+
+✓ Single combined confusion matrix saved with HD quality
+/Users/dribtasam/PycharmProjects/urolithiasis_classification/visualization.py:150: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax1.set_xticklabels(df['Model'], rotation=45, ha='right', fontweight='bold')
+✓ Accuracy comparison visualizations saved with HD quality
+✓ All comparison visualizations completed successfully!
+
+============================================================
+MODEL ACCURACY SUMMARY
+============================================================
+📊 DNN                 : 0.9895
+📊 MLP                 : 0.9967
+📊 AE-DNN              : 0.9947
+============================================================
+🏆 BEST MODEL: MLP (Accuracy: 0.9967)
+============================================================
+
+Saving models...
+DNN model saved to saved_models/dnn_model.keras
+MLP model saved to saved_models/mlp_model.keras
+AE-DNN model saved to saved_models/ae-dnn_model.keras
+
+============================================================
+FINAL MODEL COMPARISON
+============================================================
+Metric                  DNN         MLP      AE-DNN
+---------------------------------------------------
+accuracy             0.9895      0.9967      0.9947
+precision            0.9897      0.9967      0.9948
+recall               0.9895      0.9967      0.9947
+f1_score             0.9894      0.9967      0.9947
+specificity          0.9775      0.9944      0.9887
+npv                  1.0000      0.9986      1.0000
+fnr                  0.0000      0.0012      0.0000
+fpr                  0.0225      0.0056      0.0113
+jaccard              0.9791      0.9934      0.9895
+kappa                0.9788      0.9934      0.9894
+fmi                  0.9792      0.9934      0.9895
+
+============================================================
+
+Visualizations saved to: figs/
+Training history plots:
+  - unified_training_history.png
+
+Comparison visualizations:
+  - radar_comparison_chart.png
+  - metrics_comparison_heatmap.png
+  - error_rates_comparison.png
+  - performance_metrics_bar_chart.png
+  - roc_curve_comparison.png
+  - pr_curve_comparison.png
+
+Epoch comparison visualizations:
+  - epoch_comparison_final.png
+  - convergence_speed.png
+
+Architecture diagrams:
+  - architecture_diagrams/DNN_architecture.png
+  - architecture_diagrams/MLP_architecture.png
+  - architecture_diagrams/AE-DNN_architecture.png
+
+All visualizations and models saved successfully!
+
+Process finished with exit code 0
